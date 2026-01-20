@@ -42,14 +42,14 @@ const Navbar = () => {
         {/* Keep Logo */}
         <div className="flex items-center gap-2 px-1">
           <GoogleKeepIcon size={40} />
-          <span className="text-[22px] text-[#e8eaed] font-normal tracking-wide">
+          <span className="text-[22px] text-[#e8eaed] font-normal tracking-wide hidden sm:block">
             Keep
           </span>
         </div>
       </div>
 
       {/* Center section - Search Bar */}
-      <div className="flex-1 max-w-[720px] mx-4 ml-20">
+      <div className="flex-1 max-w-[720px] mx-2 sm:mx-4 sm:ml-20">
         <div
           className={`flex items-center h-12 rounded-lg transition-all duration-200 ${
             isSearchFocused
@@ -88,11 +88,11 @@ const Navbar = () => {
       </div>
 
       {/* Right section - Action buttons */}
-      <div className="flex items-center gap-1 ml-auto">
-        {/* Refresh */}
+      <div className="flex items-center gap-0 sm:gap-1 ml-auto">
+        {/* Refresh - hidden on mobile */}
         <button
           onClick={handleRefresh}
-          className="p-3 rounded-full hover:bg-[#3c4043] transition-colors duration-200"
+          className="p-2 sm:p-3 rounded-full hover:bg-[#3c4043] transition-colors duration-200 hidden sm:block"
           aria-label="Refresh"
         >
           <RefreshCw size={20} className="text-[#e8eaed]" />
@@ -111,17 +111,17 @@ const Navbar = () => {
           )}
         </button>
 
-        {/* Settings */}
+        {/* Settings - hidden on mobile */}
         <button
-          className="p-3 rounded-full hover:bg-[#3c4043] transition-colors duration-200"
+          className="p-2 sm:p-3 rounded-full hover:bg-[#3c4043] transition-colors duration-200 hidden sm:block"
           aria-label="Settings"
         >
           <Settings size={20} className="text-[#e8eaed]" />
         </button>
 
-        {/* Apps Grid */}
+        {/* Apps Grid - hidden on mobile */}
         <button
-          className="p-3 rounded-full hover:bg-[#3c4043] transition-colors duration-200"
+          className="p-2 sm:p-3 rounded-full hover:bg-[#3c4043] transition-colors duration-200 hidden md:block"
           aria-label="Google apps"
         >
           <Grid3X3 size={20} className="text-[#e8eaed]" />

@@ -133,12 +133,12 @@ const NoteModal = () => {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70"
+      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/70"
       onClick={handleBackdropClick}
     >
       <div
         ref={modalRef}
-        className="w-full max-w-[600px] min-h-[70vh] max-h-[85vh] rounded-lg shadow-2xl overflow-hidden flex flex-col"
+        className="w-full sm:max-w-[600px] h-[90vh] sm:h-auto sm:min-h-[70vh] sm:max-h-[85vh] rounded-t-xl sm:rounded-lg shadow-2xl overflow-hidden flex flex-col"
         style={{ backgroundColor: bgColor }}
         onClick={(e) => e.stopPropagation()}
       >

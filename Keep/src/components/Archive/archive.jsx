@@ -9,25 +9,25 @@ const Archive = () => {
   return (
     <main
       className={`pt-20 pb-8 transition-all duration-300 ${
-        sidebarOpen ? "ml-[280px]" : "ml-[80px]"
-      }`}
+        sidebarOpen ? "md:ml-[280px]" : "md:ml-[80px]"
+      } ml-0`}
     >
       {notes.length === 0 ? (
         /* Empty State */
-        <div className="flex flex-col items-center justify-center mt-32">
-          <div className="w-32 h-32 mb-6 opacity-60">
+        <div className="flex flex-col items-center justify-center mt-32 px-4">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 mb-6 opacity-60">
             <ArchiveIcon
-              size={120}
-              className="text-[#5f6368]"
+              size={96}
+              className="text-[#5f6368] w-full h-full"
               strokeWidth={1}
             />
           </div>
-          <p className="text-[#9aa0a6] text-lg">
+          <p className="text-[#9aa0a6] text-base sm:text-lg text-center">
             Your archived notes appear here
           </p>
         </div>
       ) : (
-        <div className="px-8">
+        <div className="px-2 sm:px-4 md:px-8">
           <div
             className={
               viewMode === "grid"

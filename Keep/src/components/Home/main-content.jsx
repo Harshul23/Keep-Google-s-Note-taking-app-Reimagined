@@ -178,11 +178,11 @@ const MainContent = () => {
   return (
     <main
       className={`pt-20 pb-8 transition-all duration-300 ${
-        sidebarOpen ? "ml-[280px]" : "ml-[80px]"
-      }`}
+        sidebarOpen ? "md:ml-[280px]" : "md:ml-[80px]"
+      } ml-0`}
     >
       {/* Note Input Area */}
-      <div className="flex justify-center px-4 mb-8">
+      <div className="flex justify-center px-2 sm:px-4 mb-8">
         <div
           ref={containerRef}
           className={`w-full max-w-[600px] border border-[#5f6368] rounded-lg shadow-lg transition-all duration-200 ${
@@ -533,7 +533,6 @@ const MainContent = () => {
           )}
         </div>
       </div>
-
       {/* Notes Display */}
       {notes.length === 0 ? (
         /* Empty State */
@@ -555,7 +554,7 @@ const MainContent = () => {
           </p>
         </div>
       ) : (
-        <div className="px-8">
+        <div className="px-2 sm:px-4 md:px-8">
           {/* Pinned Notes Section */}
           {pinnedNotes.length > 0 && (
             <div className="mb-8">
@@ -598,7 +597,7 @@ const MainContent = () => {
             </div>
           )}
         </div>
-      )}
+      )}{" "}
     </main>
   );
 };

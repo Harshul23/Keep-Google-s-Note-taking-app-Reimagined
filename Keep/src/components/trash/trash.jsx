@@ -9,13 +9,13 @@ const Trash = () => {
   return (
     <main
       className={`pt-20 pb-8 transition-all duration-300 ${
-        sidebarOpen ? "ml-[280px]" : "ml-[80px]"
-      }`}
+        sidebarOpen ? "md:ml-[280px]" : "md:ml-[80px]"
+      } ml-0`}
     >
       {/* Trash info banner */}
       {notes.length > 0 && (
-        <div className="px-8 mb-4">
-          <div className="flex items-center justify-between bg-[#28292c] rounded-lg px-4 py-3">
+        <div className="px-2 sm:px-4 md:px-8 mb-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 bg-[#28292c] rounded-lg px-4 py-3">
             <span className="text-[#9aa0a6] text-sm">
               Notes in Trash are deleted after 7 days.
             </span>
@@ -31,14 +31,20 @@ const Trash = () => {
 
       {notes.length === 0 ? (
         /* Empty State */
-        <div className="flex flex-col items-center justify-center mt-32">
-          <div className="w-32 h-32 mb-6 opacity-60">
-            <Trash2 size={120} className="text-[#5f6368]" strokeWidth={1} />
+        <div className="flex flex-col items-center justify-center mt-32 px-4">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 mb-6 opacity-60">
+            <Trash2
+              size={96}
+              className="text-[#5f6368] w-full h-full"
+              strokeWidth={1}
+            />
           </div>
-          <p className="text-[#9aa0a6] text-lg">No notes in Trash</p>
+          <p className="text-[#9aa0a6] text-base sm:text-lg text-center">
+            No notes in Trash
+          </p>
         </div>
       ) : (
-        <div className="px-8">
+        <div className="px-2 sm:px-4 md:px-8">
           <div
             className={
               viewMode === "grid"
