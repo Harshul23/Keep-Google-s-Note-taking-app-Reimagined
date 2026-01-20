@@ -251,6 +251,22 @@ const MainContent = () => {
                 rows={2}
               />
 
+              {/* Reminder Badge */}
+              {noteReminder && (
+                <div className="mb-2">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#3c4043] text-[#8ab4f8] text-xs">
+                    <Clock size={14} />
+                    {new Date(noteReminder).toLocaleString()}
+                    <button
+                      onClick={() => setNoteReminder(null)}
+                      className="hover:text-white"
+                    >
+                      <X size={12} />
+                    </button>
+                  </span>
+                </div>
+              )}
+
               {/* Checklist Items */}
               {isChecklist && (
                 <div className="space-y-1 mb-2 border-t border-[#5f6368]/30 pt-3">
@@ -317,12 +333,121 @@ const MainContent = () => {
               {/* Action Buttons */}
               <div className="flex items-center justify-between mt-3 -mx-1">
                 <div className="flex items-center gap-0.5">
-                  <button
-                    className="p-2 rounded-full hover:bg-[#3c4043] transition-colors"
-                    title="Remind me"
-                  >
-                    <BellPlus size={18} className="text-[#9aa0a6]" />
-                  </button>
+                  {/* Reminder Picker */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowReminderPicker(!showReminderPicker)}
+                      className="p-2 rounded-full hover:bg-[#3c4043] transition-colors"
+                      title="Remind me"
+                    >
+                      <BellPlus
+                        size={18}
+                        className={
+                          noteReminder ? "text-[#8ab4f8]" : "text-[#9aa0a6]"
+                        }
+                      />
+                    </button>
+                    {showReminderPicker && (
+                      <div className="absolute bottom-full left-0 mb-2 py-2 bg-[#2d2e30] rounded-lg shadow-xl border border-[#5f6368] z-50 min-w-[240px]">
+                        <p className="text-[#9aa0a6] text-xs font-medium px-4 pb-2 mb-1">
+                          Reminder:
+                        </p>
+
+                        {/* Quick options */}
+                        <button
+                          onClick={() => {
+                            const today = new Date();
+                            today.setHours(20, 0, 0, 0);
+                            setNoteReminder(today.toISOString());
+                            setShowReminderPicker(false);
+                          }}
+                          className="w-full flex items-center gap-3 px-4 py-2 text-[#e8eaed] text-sm hover:bg-[#3c4043] transition-colors"
+                        >
+                          <Clock size={16} className="text-[#9aa0a6]" />
+                          <span>Later today</span>
+                          <span className="ml-auto text-[#9aa0a6] text-xs">
+                            8:00 PM
+                          </span>
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            const tomorrow = new Date();
+                            tomorrow.setDate(tomorrow.getDate() + 1);
+                            tomorrow.setHours(8, 0, 0, 0);
+                            setNoteReminder(tomorrow.toISOString());
+                            setShowReminderPicker(false);
+                          }}
+                          className="w-full flex items-center gap-3 px-4 py-2 text-[#e8eaed] text-sm hover:bg-[#3c4043] transition-colors"
+                        >
+                          <Clock size={16} className="text-[#9aa0a6]" />
+                          <span>Tomorrow</span>
+                          <span className="ml-auto text-[#9aa0a6] text-xs">
+                            8:00 AM
+                          </span>
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            const nextWeek = new Date();
+                            nextWeek.setDate(nextWeek.getDate() + 7);
+                            nextWeek.setHours(8, 0, 0, 0);
+                            setNoteReminder(nextWeek.toISOString());
+                            setShowReminderPicker(false);
+                          }}
+                          className="w-full flex items-center gap-3 px-4 py-2 text-[#e8eaed] text-sm hover:bg-[#3c4043] transition-colors"
+                        >
+                          <Clock size={16} className="text-[#9aa0a6]" />
+                          <span>Next week</span>
+                          <span className="ml-auto text-[#9aa0a6] text-xs">
+                            Mon, 8:00 AM
+                          </span>
+                        </button>
+
+                        <div className="border-t border-[#5f6368]/30 my-2" />
+
+                        {/* Custom date/time */}
+                        <div className="px-4 py-2">
+                          <p className="text-[#9aa0a6] text-xs mb-2">
+                            Pick date & time
+                          </p>
+                          <div className="flex gap-2 mb-2">
+                            <input
+                              type="date"
+                              value={reminderDate}
+                              onChange={(e) => setReminderDate(e.target.value)}
+                              className="flex-1 bg-[#3c4043] text-[#e8eaed] text-sm rounded px-2 py-1.5 outline-none"
+                            />
+                            <input
+                              type="time"
+                              value={reminderTime}
+                              onChange={(e) => setReminderTime(e.target.value)}
+                              className="w-24 bg-[#3c4043] text-[#e8eaed] text-sm rounded px-2 py-1.5 outline-none"
+                            />
+                          </div>
+                          <button
+                            onClick={() => {
+                              if (reminderDate) {
+                                const dateTime = reminderTime
+                                  ? `${reminderDate}T${reminderTime}`
+                                  : `${reminderDate}T09:00`;
+                                setNoteReminder(
+                                  new Date(dateTime).toISOString(),
+                                );
+                                setShowReminderPicker(false);
+                                setReminderDate("");
+                                setReminderTime("");
+                              }
+                            }}
+                            disabled={!reminderDate}
+                            className="w-full bg-[#8ab4f8] text-[#202124] text-sm font-medium rounded py-1.5 hover:bg-[#aecbfa] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   <button
                     className="p-2 rounded-full hover:bg-[#3c4043] transition-colors"
                     title="Collaborator"

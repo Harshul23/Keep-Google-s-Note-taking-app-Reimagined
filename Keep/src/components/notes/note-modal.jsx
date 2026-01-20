@@ -297,8 +297,10 @@ const NoteModal = () => {
               </button>
               {showReminderPicker && (
                 <div className="absolute bottom-full left-0 mb-2 py-2 bg-[#2d2e30] rounded-lg shadow-xl border border-[#5f6368] z-50 min-w-[240px]">
-                  <p className="text-[#9aa0a6] text-xs font-medium px-4 pb-2 mb-1">Reminder:</p>
-                  
+                  <p className="text-[#9aa0a6] text-xs font-medium px-4 pb-2 mb-1">
+                    Reminder:
+                  </p>
+
                   {/* Quick options */}
                   <button
                     onClick={() => {
@@ -311,9 +313,11 @@ const NoteModal = () => {
                   >
                     <Clock size={16} className="text-[#9aa0a6]" />
                     <span>Later today</span>
-                    <span className="ml-auto text-[#9aa0a6] text-xs">8:00 PM</span>
+                    <span className="ml-auto text-[#9aa0a6] text-xs">
+                      8:00 PM
+                    </span>
                   </button>
-                  
+
                   <button
                     onClick={() => {
                       const tomorrow = new Date();
@@ -326,9 +330,11 @@ const NoteModal = () => {
                   >
                     <Clock size={16} className="text-[#9aa0a6]" />
                     <span>Tomorrow</span>
-                    <span className="ml-auto text-[#9aa0a6] text-xs">8:00 AM</span>
+                    <span className="ml-auto text-[#9aa0a6] text-xs">
+                      8:00 AM
+                    </span>
                   </button>
-                  
+
                   <button
                     onClick={() => {
                       const nextWeek = new Date();
@@ -341,14 +347,18 @@ const NoteModal = () => {
                   >
                     <Clock size={16} className="text-[#9aa0a6]" />
                     <span>Next week</span>
-                    <span className="ml-auto text-[#9aa0a6] text-xs">Mon, 8:00 AM</span>
+                    <span className="ml-auto text-[#9aa0a6] text-xs">
+                      Mon, 8:00 AM
+                    </span>
                   </button>
-                  
+
                   <div className="border-t border-[#5f6368]/30 my-2" />
-                  
+
                   {/* Custom date/time */}
                   <div className="px-4 py-2">
-                    <p className="text-[#9aa0a6] text-xs mb-2">Pick date & time</p>
+                    <p className="text-[#9aa0a6] text-xs mb-2">
+                      Pick date & time
+                    </p>
                     <div className="flex gap-2 mb-2">
                       <input
                         type="date"

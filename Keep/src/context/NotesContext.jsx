@@ -10,11 +10,174 @@ export const useNotes = () => {
   return context;
 };
 
+// Default demo notes
+const demoNotes = [
+  {
+    id: "demo1",
+    title: "Welcome to Keep! 👋",
+    content:
+      "This is your personal note-taking app. Create notes, checklists, and reminders to stay organized.",
+    color: "fog",
+    pinned: true,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: false,
+    checklistItems: [],
+    images: [],
+  },
+  {
+    id: "demo2",
+    title: "🛒 Grocery List",
+    content: "",
+    color: "mint",
+    pinned: false,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: true,
+    checklistItems: [
+      { id: "g1", text: "Milk", checked: false },
+      { id: "g2", text: "Eggs", checked: true },
+      { id: "g3", text: "Bread", checked: false },
+      { id: "g4", text: "Butter", checked: true },
+      { id: "g5", text: "Fresh vegetables", checked: false },
+    ],
+    images: [],
+  },
+  {
+    id: "demo3",
+    title: "Project Ideas 💡",
+    content:
+      "1. Build a weather app with React\n2. Create a portfolio website\n3. Learn TypeScript\n4. Contribute to open source\n5. Build a Chrome extension",
+    color: "sand",
+    pinned: true,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: false,
+    checklistItems: [],
+    images: [],
+  },
+  {
+    id: "demo4",
+    title: "Meeting Notes",
+    content:
+      "Discussed Q1 goals and roadmap. Key points:\n\n• Focus on user experience improvements\n• Launch new features by March\n• Weekly sync every Monday at 10 AM",
+    color: "storm",
+    pinned: false,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: new Date(Date.now() + 86400000).toISOString(),
+    labels: [],
+    isChecklist: false,
+    checklistItems: [],
+    images: [],
+  },
+  {
+    id: "demo5",
+    title: "📚 Books to Read",
+    content: "",
+    color: "dusk",
+    pinned: false,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: true,
+    checklistItems: [
+      { id: "b1", text: "Atomic Habits", checked: true },
+      { id: "b2", text: "The Pragmatic Programmer", checked: false },
+      { id: "b3", text: "Clean Code", checked: false },
+      { id: "b4", text: "Deep Work", checked: true },
+    ],
+    images: [],
+  },
+  {
+    id: "demo6",
+    title: "Recipe: Pasta Carbonara 🍝",
+    content:
+      "Ingredients:\n- 400g spaghetti\n- 200g guanciale or pancetta\n- 4 egg yolks\n- 100g Pecorino Romano\n- Black pepper\n\nCook pasta al dente. Fry guanciale until crispy. Mix egg yolks with cheese. Combine everything off heat. Season with pepper.",
+    color: "peach",
+    pinned: false,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: false,
+    checklistItems: [],
+    images: [],
+  },
+  {
+    id: "demo7",
+    title: "Workout Plan 💪",
+    content: "",
+    color: "coral",
+    pinned: false,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: true,
+    checklistItems: [
+      { id: "w1", text: "Monday: Chest & Triceps", checked: false },
+      { id: "w2", text: "Tuesday: Back & Biceps", checked: false },
+      { id: "w3", text: "Wednesday: Rest", checked: false },
+      { id: "w4", text: "Thursday: Legs", checked: false },
+      { id: "w5", text: "Friday: Shoulders & Abs", checked: false },
+    ],
+    images: [],
+  },
+  {
+    id: "demo8",
+    title: "Travel Bucket List ✈️",
+    content:
+      "Places I want to visit:\n\n🗼 Tokyo, Japan - Cherry blossoms in spring\n🏔️ Swiss Alps - Skiing and hiking\n🏛️ Rome, Italy - Ancient history\n🌴 Bali, Indonesia - Beaches and temples\n🦘 Australia - Great Barrier Reef",
+    color: "sage",
+    pinned: false,
+    archived: false,
+    trashed: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    reminder: null,
+    labels: [],
+    isChecklist: false,
+    checklistItems: [],
+    images: [],
+  },
+];
+
 export const NotesProvider = ({ children }) => {
-  // Load notes from localStorage on initial render
+  // Load notes from localStorage on initial render, merge with demo notes
   const [notes, setNotes] = useState(() => {
     const savedNotes = localStorage.getItem("keep-notes");
-    return savedNotes ? JSON.parse(savedNotes) : [];
+    if (savedNotes) {
+      const parsed = JSON.parse(savedNotes);
+      // Check if demo notes are already included
+      const hasDemoNotes = parsed.some((n) => n.id?.startsWith("demo"));
+      if (!hasDemoNotes) {
+        return [...parsed, ...demoNotes];
+      }
+      return parsed;
+    }
+    return demoNotes;
   });
 
   // Load labels from localStorage
